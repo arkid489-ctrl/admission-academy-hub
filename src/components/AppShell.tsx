@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import backdrop from "@/assets/backdrop.jpg";
+import brandLogo from "@/assets/manager-edu-logo-m.png.asset.json";
 import { DockNav } from "@/components/DockNav";
 import { HeaderActions } from "@/components/HeaderActions";
 import { QuickTools, useAppTheme } from "@/components/QuickTools";
@@ -32,11 +33,13 @@ function isActive(path: string, url: string) {
 
 export function BrandMark() {
   return (
-    <span className="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-red-600 via-red-500 to-blue-600 shadow-glow">
-      <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
-        <path d="M4 19V5l4 7 4-7v14" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M12 5l4 7 4-7v14" stroke="#dbeafe" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+    <span className="grid size-10 place-items-center rounded-xl bg-white/[0.06] ring-1 ring-white/10 shadow-glow">
+      <img
+        src={brandLogo.url}
+        alt=""
+        aria-hidden="true"
+        className="size-7 drop-shadow-[0_3px_10px_rgba(0,90,255,0.35)]"
+      />
     </span>
   );
 }
