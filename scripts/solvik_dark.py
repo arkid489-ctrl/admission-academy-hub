@@ -70,7 +70,7 @@ def fmt(L, C, h, a):
     base = f"oklch({L:.3f} {C:.3f} {h:.1f}"
     return base + (")" if a >= 0.999 else f" / {a})")
 
-SURFACE = (0.27, 0.012, 160.0, 0.8)    # opaque-ish dark glass (cards, panels, modals)
+SURFACE = (0.27, 0.012, 20.0, 0.8)     # opaque-ish dark glass (cards, panels, modals)
 
 def _neutral(C, neutral):
     return C < 0.02 if neutral is None else neutral
@@ -85,7 +85,7 @@ def map_bg(L, C, h, a, neutral=None):
 
 def map_text(L, C, h, a, neutral=None):
     if L >= 0.8: return None
-    if _neutral(C, neutral) or (L < 0.45 and C < 0.07): C, h = 0.008, 120.0   # neutral greys pick up Solvik's warm cream
+    if _neutral(C, neutral) or (L < 0.45 and C < 0.07): C, h = 0.008, 20.0   # neutral greys pick up Solvik's warm cream
     return fmt(0.98 - 0.42*L, C, h, a)
 
 def map_border(L, C, h, a, neutral=None):
@@ -126,6 +126,11 @@ def tailwind_palette():
     pal = {"white": parse_color("#fff"), "black": parse_color("#000")}
     for m in re.finditer(r"--color-([a-z]+-\d+):\s*([^;]+);", theme):
         pal[m.group(1)] = parse_color(m.group(2))
+    # project overrides in @theme (src/styles.css) win over Tailwind's own ramp,
+    # so re-theming an accent family there also re-themes the generated remap.
+    for m in re.finditer(r"--color-([a-z]+-\d+):\s*([^;]+);", (ROOT / "src/styles.css").read_text()):
+        c = parse_color(m.group(2))
+        if c: pal[m.group(1)] = c
     return pal
 
 def academic_palette():
@@ -136,7 +141,7 @@ def academic_palette():
 
 ACCENT_COLOR_RE = re.compile(r"oklch\([^)]*\)|#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\)")
 SEMANTIC = re.compile(r"cancel|danger|error|overdue|reject|absent|missed|delete|destructive", re.I)
-LIME_H = 124.0
+LIME_H = 15.0   # the app's accent hue: light red (the ramp src/styles.css @theme calls lime/green/emerald)
 
 ACCENT_HUES = {"rose": lambda C, h: C > 0.015 and (h >= 335 or h <= 20),
                "teal": lambda C, h: C > 0.03 and 165 <= h <= 215,

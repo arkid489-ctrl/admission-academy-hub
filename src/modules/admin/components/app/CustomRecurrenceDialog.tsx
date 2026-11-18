@@ -166,7 +166,7 @@ export function CustomRecurrenceDialog({
                     aria-label={name}
                     aria-pressed={selected}
                     onClick={() => toggleDay(index)}
-                    className={`h-9 w-9 shrink-0 rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A9D8F] ${selected ? "bg-[#164E63] text-white" : "bg-[#E8F8F2] text-[#164E63] hover:bg-[#D8F2E9]"}`}
+                    className={`h-9 w-9 shrink-0 rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A9D8F] ${selected ? "bg-[#164E63] text-white" : "bg-[#E8F8F2] text-[#164E63] hover:bg-[#FFE4E3]"}`}
                   >
                     {short}
                   </button>

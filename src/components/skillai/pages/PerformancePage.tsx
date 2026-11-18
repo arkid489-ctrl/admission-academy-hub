@@ -7,7 +7,7 @@ import { TASK_CATEGORIES } from '../types'
 import { money, isOverdue } from '../utils'
 import { Badge, Btn, Card, DoubleClickAction, DropdownSelect, Modal, Progress, RecordRow, SearchInput, statusTone } from '../components/ui'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, CartesianGrid, Legend, PieChart, Pie, Cell } from 'recharts'
-const COLORS = ['#0F2A4A', '#2563eb', '#f59e0b', '#10b981', '#ef4444']
+const COLORS = ['#0F2A4A', '#2563eb', '#f59e0b', '#ea727f', '#ef4444']
 export default function PerformancePage() {
   const { tasks, approvals, settings } = useApp(); const nav = useNavigate(); const location = useLocation(); const [params] = useSearchParams()
   const requestedSection = location.pathname.split('/')[2] || 'overview'

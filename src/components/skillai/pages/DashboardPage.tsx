@@ -13,7 +13,7 @@ import { departments, events, monthlyTrend, staff } from '../data/seed'
 import { fmt, isOverdue, money } from '../utils'
 import { Badge, Btn, Card, DoubleClickAction, Progress, RecordRow, RecordSurface, priorityTone, statusTone } from '../components/ui'
 
-const chartColors = ['#8884f2', '#62b879', '#f28b97', '#e9a057', '#65a6c5']
+const chartColors = ['#8884f2', '#e58089', '#f28b97', '#e9a057', '#65a6c5']
 const startOfDay = (date: Date) => new Date(date.getFullYear(), date.getMonth(), date.getDate())
 const dateOnly = (value: string) => new Date(`${value}T00:00:00`)
 const localDateKey = (date: Date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
@@ -200,7 +200,7 @@ export default function DashboardPage() {
                   <Tooltip />
                   <Legend wrapperStyle={{ fontSize: 10 }} />
                   <Line type="monotone" dataKey="actual" name="Actual" stroke="#8884f2" strokeWidth={2.5} dot={{ r: 3 }} />
-                  <Line type="monotone" dataKey="target" name="Target" stroke="#62b879" strokeWidth={2} strokeDasharray="5 4" dot={false} />
+                  <Line type="monotone" dataKey="target" name="Target" stroke="#e58089" strokeWidth={2} strokeDasharray="5 4" dot={false} />
                 </LineChart>
               </ResponsiveContainer>
             </div>

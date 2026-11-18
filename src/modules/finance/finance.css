@@ -50,8 +50,8 @@
   --destructive: #DC2626;
   --destructive-foreground: #FFFFFF;
   --danger-soft: #FEECEC;
-  --success: #15803D;
-  --success-soft: #E7F6EC;
+  --success: #AB4351;
+  --success-soft: #FFECEC;
   --warning: #854D0E;
   --warning-soft: #FEF3C7;
   --info: #0E7490;
@@ -60,7 +60,7 @@
   --input: #B2CBC7;
   --ring: #1D8B94;
   --chart-1: #1D8B94;
-  --chart-2: #2E9E63;
+  --chart-2: #CA616C;
   --chart-3: #C4633F;
   --chart-4: #4C7FA1;
   --chart-5: #4FB8B4;
@@ -81,9 +81,9 @@
   --application-line: #D9D9D9;
   --application-surface: #FFFFFF;
   --application-table-header: #F2F2F2;
-  --sage: #78947B;
-  --sage-soft: #B7C7AD;
-  --sage-pale: #E8E9D9;
+  --sage: #A7807F;
+  --sage-soft: #DAB7B6;
+  --sage-pale: #F6E2E2;
   --ivory: #F7F8F4;
 }
 
@@ -169,7 +169,7 @@
     color-scheme: light !important;
   }
   .finance-module {
-    background: oklch(0.270 0.012 160.0 / 0.8) !important;
+    background: oklch(0.270 0.012 20 / 0.8) !important;
     background-image: none !important;
     background-attachment: scroll !important;
   }
@@ -308,13 +308,13 @@
   border-color: rgba(76, 127, 161, 0.42);
 }
 .finance-module .dashboard-glass-card {
-  background-color: oklch(0.270 0.012 160.0 / 0.704);
+  background-color: oklch(0.270 0.012 20 / 0.704);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 .finance-module .dashboard-chart-plot {
   border-radius: 0.75rem;
-  background-color: oklch(0.270 0.012 160.0 / 0.608);
+  background-color: oklch(0.270 0.012 20 / 0.608);
 }
 .finance-module .dashboard-stat-grid .stat-card:hover,
 .finance-module .dashboard-panels > *:hover,
@@ -349,7 +349,7 @@
   to { opacity: 1; transform: translateY(0); }
 }
 @supports not (backdrop-filter: blur(1px)) {
-  .finance-module .dashboard-glass-card { background-color: oklch(0.270 0.012 160.0 / 0.8); }
+  .finance-module .dashboard-glass-card { background-color: oklch(0.270 0.012 20 / 0.8); }
 }
 @media (prefers-reduced-motion: reduce) {
   .finance-module .dashboard-stat-grid .stat-card,
@@ -460,8 +460,8 @@
   .finance-module .financial-report-print {
     width: 100%;
     padding: 0;
-    color: oklch(0.905 0.008 120.0);
-    background: oklch(0.270 0.012 160.0 / 0.8);
+    color: oklch(0.905 0.008 20);
+    background: oklch(0.270 0.012 20 / 0.8);
     box-shadow: none !important;
     border: none !important;
   }

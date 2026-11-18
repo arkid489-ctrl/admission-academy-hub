@@ -583,13 +583,13 @@ export function BotanicalSprig({
   stemFrom?: "bottom-left" | "top-right" | undefined;
 }) {
   const leaves = [
-    { fill: "#78947B", opacity: 0.4, transform: "translate(118 22) rotate(-24) scale(0.62)" },
-    { fill: "#B7C7AD", opacity: 0.45, transform: "translate(96 42) rotate(140) scale(0.55)" },
-    { fill: "#8FA687", opacity: 0.35, transform: "translate(84 64) rotate(-42) scale(0.68)" },
-    { fill: "#D8DFC8", opacity: 0.5, transform: "translate(66 82) rotate(150) scale(0.6)" },
-    { fill: "#78947B", opacity: 0.3, transform: "translate(52 100) rotate(-58) scale(0.74)" },
-    { fill: "#B7C7AD", opacity: 0.4, transform: "translate(38 118) rotate(128) scale(0.66)" },
-    { fill: "#8FA687", opacity: 0.28, transform: "translate(24 134) rotate(-70) scale(0.8)" },
+    { fill: "#A7807F", opacity: 0.4, transform: "translate(118 22) rotate(-24) scale(0.62)" },
+    { fill: "#DAB7B6", opacity: 0.45, transform: "translate(96 42) rotate(140) scale(0.55)" },
+    { fill: "#BC9294", opacity: 0.35, transform: "translate(84 64) rotate(-42) scale(0.68)" },
+    { fill: "#F0D4D3", opacity: 0.5, transform: "translate(66 82) rotate(150) scale(0.6)" },
+    { fill: "#A7807F", opacity: 0.3, transform: "translate(52 100) rotate(-58) scale(0.74)" },
+    { fill: "#DAB7B6", opacity: 0.4, transform: "translate(38 118) rotate(128) scale(0.66)" },
+    { fill: "#BC9294", opacity: 0.28, transform: "translate(24 134) rotate(-70) scale(0.8)" },
   ];
   return (
     <svg
@@ -602,7 +602,7 @@ export function BotanicalSprig({
       <path
         d="M6 154 C 52 128, 92 84, 124 18"
         fill="none"
-        stroke="#78947B"
+        stroke="#A7807F"
         strokeOpacity="0.45"
         strokeWidth="1.6"
         strokeLinecap="round"

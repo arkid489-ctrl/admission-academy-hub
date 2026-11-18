@@ -6,7 +6,7 @@ import { departments, monthlyTrend, staff } from '../data/seed'
 import { money, isOverdue } from '../utils'
 import { Badge, Btn, Card, Modal, Progress, SearchInput, inputCls, statusTone } from '../components/ui'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, CartesianGrid, Legend, PieChart, Pie, Cell } from 'recharts'
-const COLORS = ['var(--lime)', 'var(--sky)', 'oklch(0.82 0.13 80)', 'oklch(0.75 0.06 145)', 'var(--salmon)']
+const COLORS = ['var(--lime)', 'var(--sky)', 'oklch(0.82 0.13 80)', 'oklch(0.75 0.06 15)', 'var(--salmon)']
 export default function PerformancePage() {
   const { tasks, approvals } = useApp(); const nav = useNavigate()
   const [period, setPeriod] = useState('Last 6 months'); const [dept, setDept] = useState('All'); const [staffFilter, setStaffFilter] = useState('All'); const [category, setCategory] = useState('All'); const [compare, setCompare] = useState(true)

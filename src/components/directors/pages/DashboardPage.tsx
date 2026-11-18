@@ -13,7 +13,7 @@ import { fmt, isOverdue, money } from "../utils"
 import { Badge, Btn, Card, Progress, priorityTone, statusTone } from "../components/ui"
 import type { Query } from "../links"
 
-const chartColors = ['var(--lime)', 'oklch(0.75 0.06 145)', 'var(--salmon)', 'var(--cream)', 'var(--sky)']
+const chartColors = ['var(--lime)', 'oklch(0.75 0.06 15)', 'var(--salmon)', 'var(--cream)', 'var(--sky)']
 const startOfDay = (date: Date) => new Date(date.getFullYear(), date.getMonth(), date.getDate())
 const dateOnly = (value: string) => new Date(`${value}T00:00:00`)
 const localDateKey = (date: Date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`

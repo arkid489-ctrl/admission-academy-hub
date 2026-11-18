@@ -40,7 +40,7 @@ const studentRecordTrend = [
   { month: "Nov", records: 900 },
 ];
 
-const courseDistributionColors = ["var(--lime)", "var(--sky)", "var(--salmon)", "var(--cream)", "oklch(0.75 0.06 145)"];
+const courseDistributionColors = ["var(--lime)", "var(--sky)", "var(--salmon)", "var(--cream)", "oklch(0.75 0.06 15)"];
 const demoMultimediaStudentCount = 18;
 
 function Dashboard() {

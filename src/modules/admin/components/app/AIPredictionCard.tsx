@@ -23,7 +23,7 @@ export type AIPredictionCardProps = {
 };
 
 const statusStyle: Record<string, string> = {
-  "On Track": "border-[#A7E8D0] bg-[#E8F8F2] text-[#164E63]",
+  "On Track": "border-[#FFC5C8] bg-[#E8F8F2] text-[#164E63]",
   "Almost Complete": "border-amber-200 bg-amber-100 text-amber-800",
   Delayed: "border-red-200 bg-red-100 text-red-800",
 };

@@ -923,12 +923,12 @@ function Batches() {
                                 const classTone = approved
                                   ? "border-border/60 bg-muted/40 text-muted-foreground hover:bg-muted/60"
                                   : categoryLabel === "Multimedia"
-                                    ? "border-[#A7E8D0] bg-[#E8F8F2] text-[#164E63] hover:bg-[#D8F2E9]"
+                                    ? "border-[#FFC5C8] bg-[#E8F8F2] text-[#164E63] hover:bg-[#FFE4E3]"
                                     : categoryLabel === "Accounts"
-                                      ? "border-[#8ECFC2] bg-[#E8F8F2] text-[#164E63] hover:bg-[#D8F2E9]"
+                                      ? "border-[#8ECFC2] bg-[#E8F8F2] text-[#164E63] hover:bg-[#FFE4E3]"
                                       : categoryLabel === "Management"
                                         ? "border-[#CBD5E1] bg-[#F1F5F7] text-[#475569] hover:bg-[#E2E8F0]"
-                                        : "border-[#8ECFC2] bg-[#E8F8F2] text-[#164E63] hover:bg-[#D8F2E9]";
+                                        : "border-[#8ECFC2] bg-[#E8F8F2] text-[#164E63] hover:bg-[#FFE4E3]";
                                 const recurrenceRule = scheduledClass.recurrenceRule as
                                   RecurrenceRule | undefined;
                                 const scheduleEndDate =
@@ -1362,7 +1362,7 @@ function Batches() {
             > = {
               AI: {
                 active: { borderColor: "#236b78", backgroundColor: "#236b78", color: "#fff" },
-                inactive: { borderColor: "#a7e8d0", backgroundColor: "#e8f8f2", color: "#164e63" },
+                inactive: { borderColor: "#ffc5c8", backgroundColor: "#e8f8f2", color: "#164e63" },
               },
               Multimedia: {
                 active: { borderColor: "#2a9d8f", backgroundColor: "#2a9d8f", color: "#fff" },
@@ -1370,7 +1370,7 @@ function Batches() {
               },
               Accounts: {
                 active: { borderColor: "#368b79", backgroundColor: "#368b79", color: "#fff" },
-                inactive: { borderColor: "#b8dfc7", backgroundColor: "#edf7f0", color: "#356b55" },
+                inactive: { borderColor: "#f5c7c9", backgroundColor: "#edf7f0", color: "#814e52" },
               },
               Management: {
                 active: { borderColor: "#527f9f", backgroundColor: "#527f9f", color: "#fff" },
@@ -1409,7 +1409,7 @@ function Batches() {
             />
           </div>
         ) : (
-          <div className="mb-4 rounded-[14px] border border-[#A7E8D0] bg-[#E8F8F2] p-4 text-sm text-[#64748B]">
+          <div className="mb-4 rounded-[14px] border border-[#FFC5C8] bg-[#E8F8F2] p-4 text-sm text-[#64748B]">
             Insufficient data to generate a reliable prediction for {scheduleCategory}. An active
             course batch with planned weekly sessions is required.
           </div>
