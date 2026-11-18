@@ -6,7 +6,7 @@ import {
   BarChart3, Activity, CircleDot, ShieldCheck, Landmark,
 } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import backdrop from "@/assets/backdrop.jpg";
+import backdrop from "@/assets/backdrop-infinity.jpg.asset.json";
 import brandLogo from "@/assets/manager-edu-logo-m.png.asset.json";
 import { DockNav } from "@/components/DockNav";
 import { HeaderActions } from "@/components/HeaderActions";
@@ -67,7 +67,7 @@ export function AppShell({
 
   return (
     <div className={`solvik relative min-h-screen w-full font-sans ${theme === "light" ? "light" : ""}`}>
-      <div className="solvik-backdrop" style={{ backgroundImage: `url(${backdrop})` }} aria-hidden />
+      <div className="solvik-backdrop" style={{ backgroundImage: `url(${backdrop.url})` }} aria-hidden />
 
       <QuickTools theme={theme} onThemeChange={setTheme} />
 
