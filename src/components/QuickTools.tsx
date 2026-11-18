@@ -36,9 +36,10 @@ export function QuickTools({
 
   useEffect(() => {
     try {
-      setCollapsed(localStorage.getItem(QUICK_TOOLS_STORAGE_KEY) === "true");
+      // The rail only reserves space on screen when it was left open on purpose.
+      setCollapsed(localStorage.getItem(QUICK_TOOLS_STORAGE_KEY) !== "false");
     } catch {
-      // The rail stays open when browser storage is unavailable.
+      // The rail stays tucked away when browser storage is unavailable.
     }
   }, []);
 

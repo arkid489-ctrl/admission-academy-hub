@@ -1618,7 +1618,7 @@ nav a { transition: background .25s, color .25s, border-color .25s; }
 
   .quick-tools {
     position: fixed;
-    left: 24px;
+    left: 0;
     top: 50%;
     z-index: 30;
     align-items: center;
@@ -1653,7 +1653,11 @@ nav a { transition: background .25s, color .25s, border-color .25s; }
     -webkit-backdrop-filter: blur(22px);
     transition: margin .3s ease, background .2s ease, transform .2s ease;
   }
-  .quick-tools[data-collapsed="true"] .quick-tools-toggle { margin-left: 0; }
+  .quick-tools[data-collapsed="true"] .quick-tools-toggle {
+    margin-left: 0;
+    border-left-width: 0;
+    border-radius: 0 999px 999px 0;
+  }
   .quick-tools-toggle:hover { background: var(--accent); transform: scale(1.05); }
   .quick-tools-toggle:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
   .quick-tools-popover {
@@ -2308,3 +2312,11 @@ nav a { transition: background .25s, color .25s, border-color .25s; }
 ) { color: var(--primary); }
 
 .solvik.light .header-search-field { background: oklch(1 0 0 / 80%); }
+
+/* Unlayered so these beat Tailwind's px-* utilities on the shared page frame.
+   The quick-tools rail floats over the page edge, so a tucked-away rail costs
+   no width; only pulling it open nudges the page to make room. */
+.app-frame { transition: padding-inline-start .3s ease; }
+@media (min-width: 1280px) {
+  .solvik:has(.quick-tools[data-collapsed="false"]) .app-frame { padding-inline-start: 108px; }
+}

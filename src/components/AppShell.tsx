@@ -41,8 +41,8 @@ export function BrandMark() {
   );
 }
 
-/** Shared horizontal frame so header, rail gutter and page content line up. */
-const frame = "mx-auto w-full max-w-[1720px] px-4 sm:px-6 xl:pl-32 xl:pr-10";
+/** Shared horizontal frame so header, quick-tools gutter and page content line up. */
+const frame = "app-frame mx-auto w-full max-w-[1720px] px-4 sm:px-6 xl:px-8";
 
 export function AppShell({
   title,
