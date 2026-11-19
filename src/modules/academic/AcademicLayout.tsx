@@ -7,7 +7,7 @@ import { ToastContainer } from './components/common/Toast';
 const pages = [
   { to: '/academic', label: 'Dashboard', exact: true },
   { to: '/academic/schedule', label: 'Schedule', exact: false },
-  { to: '/academic/syllabus', label: 'Syllabus', exact: false },
+  { to: '/academic/syllabus', label: 'My class  Schedule', exact: false },
   { to: '/academic/notes', label: 'Notes', exact: false },
   { to: '/academic/attendance', label: 'Attendance', exact: false },
   { to: '/academic/history', label: 'History', exact: false },
