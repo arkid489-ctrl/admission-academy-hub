@@ -677,3 +677,77 @@
   }
 }
 
+
+/* Home summary cards: chart by default, details revealed on hover / focus */
+.academic-module .stat-reveal {
+  --stat-chart-track: color-mix(in srgb, currentColor 9%, transparent);
+  --stat-chart-muted: color-mix(in srgb, currentColor 30%, transparent);
+  outline: none;
+}
+.academic-module .stat-reveal:focus-visible { box-shadow: 0 0 0 2px var(--ring, var(--lime)); }
+.academic-module .stat-reveal-body {
+  display: grid;
+  margin-top: 12px;
+  min-height: 66px;
+}
+.academic-module .stat-reveal-chart,
+.academic-module .stat-reveal-detail {
+  grid-area: 1 / 1;
+  align-self: center;
+  min-width: 0;
+  transition: opacity 220ms ease, transform 260ms ease;
+}
+.academic-module .stat-reveal-detail {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+.academic-module .stat-reveal:is(:hover, :focus-visible, :focus-within) .stat-reveal-chart {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.97);
+}
+.academic-module .stat-reveal:is(:hover, :focus-visible, :focus-within) .stat-reveal-detail {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+/* Touch screens have no hover: show the chart with the details under it */
+@media (hover: none) {
+  .academic-module .stat-reveal-body { gap: 10px; }
+  .academic-module .stat-reveal-detail { grid-area: 2 / 1; opacity: 1; transform: none; pointer-events: auto; }
+  .academic-module .stat-reveal:is(:hover, :focus-visible, :focus-within) .stat-reveal-chart { opacity: 1; transform: none; }
+}
+.academic-module .stat-chart-svg { display: block; width: 100%; height: auto; max-height: 66px; overflow: visible; }
+.academic-module .stat-chart-label { font-size: 9px; font-weight: 600; fill: var(--muted-foreground); }
+.academic-module .stat-chart-label.is-active { fill: var(--lime); }
+.academic-module .stat-chart-bar {
+  transform-box: fill-box;
+  transform-origin: bottom;
+  animation: stat-chart-grow 600ms cubic-bezier(.2,.8,.2,1) both;
+}
+.academic-module .stat-chart-seg { animation: stat-chart-fade 500ms ease both; }
+.academic-module .stat-chart-arc { transition: stroke-dasharray 500ms ease; }
+.academic-module .stat-chart-row { display: flex; align-items: center; gap: 14px; }
+.academic-module .stat-chart-donut { width: 62px; height: 62px; flex-shrink: 0; }
+.academic-module .stat-chart-gauge { width: 88px; height: 48px; flex-shrink: 0; overflow: visible; }
+.academic-module .stat-chart-gauge-text { font-size: 13px; font-weight: 700; fill: var(--foreground); font-variant-numeric: tabular-nums; }
+.academic-module .stat-chart-stack { display: grid; gap: 12px; }
+.academic-module .stat-chart-stack .stat-chart-legend { flex-direction: row; flex-wrap: wrap; gap: 4px 12px; }
+.academic-module .stat-chart-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+.academic-module .stat-chart-legend li { display: flex; align-items: center; gap: 6px; }
+.academic-module .stat-chart-dot { width: 8px; height: 8px; border-radius: 999px; flex-shrink: 0; }
+@keyframes stat-chart-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes stat-chart-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .academic-module :is(.stat-chart-bar, .stat-chart-seg) { animation: none; }
+  .academic-module :is(.stat-reveal-chart, .stat-reveal-detail) { transition: none; }
+}

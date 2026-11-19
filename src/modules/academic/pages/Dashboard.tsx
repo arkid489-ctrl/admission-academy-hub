@@ -35,6 +35,7 @@ import { ScheduleDetailsModal } from '../components/modals/ScheduleDetailsModal'
 import { ChangeRequestModal } from '../components/modals/ChangeRequestModal';
 import { getScheduleCompletionStatus } from '../utils/scheduleCompletion';
 import { getBatchEndDate } from '../utils/batchEndDate';
+import { WeekBars, Donut, StackedBar, Gauge } from '../components/dashboard/StatCharts';
 
 const AnimatedMetric: React.FC<{ value: number }> = ({ value }) => {
   const [displayedValue, setDisplayedValue] = useState(0);
@@ -151,6 +152,33 @@ export const Dashboard: React.FC = () => {
     });
   }, [activeDate, activeSchedules]);
 
+  // Chart data for the summary cards
+  const weekBarData = useMemo(
+    () => dayScheduleOptions.map((d) => ({
+      label: d.dayName.charAt(0),
+      value: activeSchedules.filter(
+        (s) => d.date >= s.startDate && isBatchScheduledOnDate(s.batch, d.date, s.scheduledDays)
+      ).length,
+      active: d.dayName === activeDayName
+    })),
+    [dayScheduleOptions, activeSchedules, activeDayName]
+  );
+  const taskSegments = useMemo(() => [
+    { label: 'Pending', value: todayAdminTasks.filter((t) => t.status === 'Pending').length, color: 'var(--lime)' },
+    { label: 'In progress', value: todayAdminTasks.filter((t) => t.status === 'In Progress').length, color: 'var(--chart-5)' },
+    { label: 'Done', value: todayAdminTasks.filter((t) => t.status === 'Completed').length, color: 'var(--sky, var(--chart-2))' }
+  ], [todayAdminTasks]);
+  const approvalSegments = useMemo(() => [
+    { label: 'Approved', value: schedules.filter((s) => s.approvalStatus === 'Approved').length, color: 'var(--sky, var(--chart-2))' },
+    { label: 'Pending', value: schedules.filter((s) => s.approvalStatus === 'Pending').length, color: 'var(--lime)' },
+    { label: 'Changes', value: schedules.filter((s) => s.approvalStatus === 'Change Requested').length, color: 'var(--chart-5)' }
+  ], [schedules]);
+  const syllabusTotalToday = Math.max(
+    schedules.filter((s) => todayStr >= s.startDate && isBatchScheduledOnDate(s.batch, todayStr, s.scheduledDays)).length,
+    syllabusPendingCount
+  );
+  const syllabusUpdatedToday = Math.max(syllabusTotalToday - syllabusPendingCount, 0);
+
   // Active overdue reminders
   const overdueReminders = notifications.filter(
     (n) => !n.isResolved && n.category === 'syllabus_overdue'
@@ -190,12 +218,14 @@ export const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Summary Cards */}
+      {/* Summary Cards: chart by default, details on hover / keyboard focus */}
       <div className="dashboard-metrics grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: Today's Classes */}
         <div
+          tabIndex={0}
           onClick={() => navigate({ to: '/academic/schedule' })}
-          className="dashboard-stat-card p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-indigo-300 transition-colors cursor-pointer group"
+          onKeyDown={(e) => { if (e.key === 'Enter') void navigate({ to: '/academic/schedule' }); }}
+          className="dashboard-stat-card stat-reveal p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-indigo-300 transition-colors cursor-pointer group"
         >
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
@@ -205,20 +235,29 @@ export const Dashboard: React.FC = () => {
               <CalendarDays className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-slate-900 font-mono-numbers">
-              <AnimatedMetric value={todayClasses.length} />
-            </span>
-            <span className="text-xs text-slate-500">batches ({activeDayName})</span>
+          <div className="stat-reveal-body">
+            <div className="stat-reveal-chart">
+              <WeekBars days={weekBarData} />
+            </div>
+            <div className="stat-reveal-detail">
+              <div className="flex items-baseline gap-2">
+                <span className="text-2xl font-bold text-slate-900 font-mono-numbers">
+                  <AnimatedMetric value={todayClasses.length} />
+                </span>
+                <span className="text-xs text-slate-500">batches ({activeDayName})</span>
+              </div>
+              <div className="mt-1 text-[11px] text-indigo-700 font-semibold truncate">
+                {activeBatchNames}
+              </div>
+            </div>
           </div>
-          <div className="mt-1 text-[11px] text-indigo-700 font-semibold truncate">
-            {activeBatchNames}
-          </div>
-          
         </div>
 
         {/* Card 2: Free Hours & Admin Tasks */}
-        <div className="dashboard-stat-card p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-indigo-300 transition-colors">
+        <div
+          tabIndex={0}
+          className="dashboard-stat-card stat-reveal p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-indigo-300 transition-colors"
+        >
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
               Free Hours & Admin Tasks
@@ -227,23 +266,32 @@ export const Dashboard: React.FC = () => {
               <Briefcase className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-slate-900 font-mono-numbers">
-              <AnimatedMetric value={todayAdminTasks.filter((t) => t.status !== 'Completed').length} />
-            </span>
-            <span className="text-xs text-slate-500">
-              active tasks ({freeHourSlots.length} free windows)
-            </span>
-          </div>
-          <div className="mt-1 text-xs text-slate-500">
-            Admin assigned during free hours
+          <div className="stat-reveal-body">
+            <div className="stat-reveal-chart">
+              <Donut segments={taskSegments} label="Admin tasks by status" />
+            </div>
+            <div className="stat-reveal-detail">
+              <div className="flex items-baseline gap-2">
+                <span className="text-2xl font-bold text-slate-900 font-mono-numbers">
+                  <AnimatedMetric value={todayAdminTasks.filter((t) => t.status !== 'Completed').length} />
+                </span>
+                <span className="text-xs text-slate-500">
+                  active tasks ({freeHourSlots.length} free windows)
+                </span>
+              </div>
+              <div className="mt-1 text-xs text-slate-500">
+                Admin assigned during free hours
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Card 3: Pending Schedule Approvals */}
         <div
+          tabIndex={0}
           onClick={() => navigate({ to: '/academic/schedule' })}
-          className="dashboard-stat-card p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-amber-300 transition-colors cursor-pointer group"
+          onKeyDown={(e) => { if (e.key === 'Enter') void navigate({ to: '/academic/schedule' }); }}
+          className="dashboard-stat-card stat-reveal p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-amber-300 transition-colors cursor-pointer group"
         >
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
@@ -253,22 +301,31 @@ export const Dashboard: React.FC = () => {
               <Clock className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-slate-900 font-mono-numbers">
-              <AnimatedMetric value={pendingApprovalsCount} />
-            </span>
-            <span className="text-xs text-slate-500">awaiting review</span>
-          </div>
-          <div className="mt-1 flex items-center gap-1 text-xs text-amber-600 font-medium group-hover:translate-x-0.5 transition-transform">
-            <span>Review assignments</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+          <div className="stat-reveal-body">
+            <div className="stat-reveal-chart">
+              <StackedBar segments={approvalSegments} label="Schedules by approval status" />
+            </div>
+            <div className="stat-reveal-detail">
+              <div className="flex items-baseline gap-2">
+                <span className="text-2xl font-bold text-slate-900 font-mono-numbers">
+                  <AnimatedMetric value={pendingApprovalsCount} />
+                </span>
+                <span className="text-xs text-slate-500">awaiting review</span>
+              </div>
+              <div className="mt-1 flex items-center gap-1 text-xs text-amber-600 font-medium group-hover:translate-x-0.5 transition-transform">
+                <span>Review assignments</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Card 4: Syllabus Updates Pending */}
         <div
+          tabIndex={0}
           onClick={() => navigate({ to: '/academic/notifications' })}
-          className="dashboard-stat-card p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-lime-300 transition-colors cursor-pointer group"
+          onKeyDown={(e) => { if (e.key === 'Enter') void navigate({ to: '/academic/notifications' }); }}
+          className="dashboard-stat-card stat-reveal p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-lime-300 transition-colors cursor-pointer group"
         >
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
@@ -278,15 +335,28 @@ export const Dashboard: React.FC = () => {
               <AlertCircle className="w-4 h-4" />
             </div>
           </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-slate-900 font-mono-numbers">
-              <AnimatedMetric value={syllabusPendingCount} />
-            </span>
-            <span className="text-xs text-slate-500">actions needed</span>
-          </div>
-          <div className="mt-1 flex items-center gap-1 text-xs text-lime-600 font-medium group-hover:translate-x-0.5 transition-transform">
-            <span>Check reminders</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+          <div className="stat-reveal-body">
+            <div className="stat-reveal-chart">
+              <Gauge
+                done={syllabusUpdatedToday}
+                total={syllabusTotalToday}
+                label="Today's syllabus updates completed"
+                doneLabel="Updated"
+                restLabel="Pending"
+              />
+            </div>
+            <div className="stat-reveal-detail">
+              <div className="flex items-baseline gap-2">
+                <span className="text-2xl font-bold text-slate-900 font-mono-numbers">
+                  <AnimatedMetric value={syllabusPendingCount} />
+                </span>
+                <span className="text-xs text-slate-500">actions needed</span>
+              </div>
+              <div className="mt-1 flex items-center gap-1 text-xs text-lime-600 font-medium group-hover:translate-x-0.5 transition-transform">
+                <span>Check reminders</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
