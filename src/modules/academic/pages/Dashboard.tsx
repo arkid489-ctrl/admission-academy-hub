@@ -223,8 +223,8 @@ export const Dashboard: React.FC = () => {
         {/* Card 1: Today's Classes */}
         <div
           tabIndex={0}
-          onClick={() => navigate({ to: '/academic/schedule' })}
-          onKeyDown={(e) => { if (e.key === 'Enter') void navigate({ to: '/academic/schedule' }); }}
+          onClick={() => navigate({ to: '/academic/syllabus' })}
+          onKeyDown={(e) => { if (e.key === 'Enter') void navigate({ to: '/academic/syllabus' }); }}
           className="dashboard-stat-card stat-reveal p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-indigo-300 transition-colors cursor-pointer group"
         >
           <div className="flex items-center justify-between">
@@ -289,8 +289,8 @@ export const Dashboard: React.FC = () => {
         {/* Card 3: Pending Schedule Approvals */}
         <div
           tabIndex={0}
-          onClick={() => navigate({ to: '/academic/schedule' })}
-          onKeyDown={(e) => { if (e.key === 'Enter') void navigate({ to: '/academic/schedule' }); }}
+          onClick={() => navigate({ to: '/academic/syllabus' })}
+          onKeyDown={(e) => { if (e.key === 'Enter') void navigate({ to: '/academic/syllabus' }); }}
           className="dashboard-stat-card stat-reveal p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-amber-300 transition-colors cursor-pointer group"
         >
           <div className="flex items-center justify-between">
@@ -387,7 +387,7 @@ export const Dashboard: React.FC = () => {
 
               <div className="flex items-center gap-2 self-start sm:self-center">
                 <button
-                  onClick={() => navigate({ to: '/academic/schedule' })}
+                  onClick={() => navigate({ to: '/academic/syllabus' })}
                   className="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1 cursor-pointer"
                 >
                   <span>Full Roster</span>
@@ -436,7 +436,7 @@ export const Dashboard: React.FC = () => {
                 title="No Batches Scheduled Today"
                 description={`You have no assigned academic batches scheduled on ${activeDayName}. You may use this time for admin-assigned tasks or curriculum preparation.`}
                 actionText="Browse Upcoming Schedule"
-                onAction={() => { void navigate({ to: '/academic/schedule' }); }}
+                onAction={() => { void navigate({ to: '/academic/syllabus' }); }}
               />
             ) : (
               <div className="space-y-2">

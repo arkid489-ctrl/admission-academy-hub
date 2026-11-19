@@ -351,7 +351,7 @@ export const SyllabusTracker: React.FC = () => {
           </p>
           <div className="pt-2">
             <button
-              onClick={() => navigate({ to: '/academic/schedule' })}
+              onClick={() => navigate({ to: '/academic/syllabus' })}
               className="px-4 py-2.5 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl transition-colors shadow-2xs flex items-center gap-2 mx-auto cursor-pointer"
             >
               <span>Go to My Class Schedule to Approve</span>
@@ -382,7 +382,7 @@ export const SyllabusTracker: React.FC = () => {
               </div>
             </div>
             <button
-              onClick={() => navigate({ to: '/academic/schedule' })}
+              onClick={() => navigate({ to: '/academic/syllabus' })}
               className="px-3 py-1.5 text-xs font-semibold text-amber-900 bg-amber-100 hover:bg-amber-200 rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               Review & Approve
@@ -634,7 +634,7 @@ export const SyllabusTracker: React.FC = () => {
 
                 <div className="mt-5 pt-3 border-t border-amber-200/60">
                   <button
-                    onClick={() => navigate({ to: '/academic/schedule' })}
+                    onClick={() => navigate({ to: '/academic/syllabus' })}
                     className="w-full py-2 px-3 text-xs font-semibold text-amber-900 bg-amber-100 hover:bg-amber-200 rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
                   >
                     <span>Approve in My Class Schedule</span>

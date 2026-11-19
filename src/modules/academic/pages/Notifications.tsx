@@ -174,7 +174,7 @@ export const Notifications: React.FC = () => {
                             if (isOverdue) {
                               navigate({ to: '/academic/syllabus', search: { session: item.sessionId || '', date: item.dateContext || '' } });
                             } else if (isApproval) {
-                              navigate({ to: '/academic/schedule' });
+                              navigate({ to: '/academic/syllabus' });
                             } else if (isExamination && item.relatedRequestId) {
                               navigate({ to: '/academic/examinations', search: { exam: item.relatedRequestId } });
                             } else if (isFinanceSubmission && item.sessionId) {

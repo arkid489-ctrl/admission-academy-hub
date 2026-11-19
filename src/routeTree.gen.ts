@@ -25,7 +25,6 @@ import { Route as AcademicHistoryRouteImport } from './routes/academic.history'
 import { Route as AcademicNotesRouteImport } from './routes/academic.notes'
 import { Route as AcademicNotificationsRouteImport } from './routes/academic.notifications'
 import { Route as AcademicProfileRouteImport } from './routes/academic.profile'
-import { Route as AcademicScheduleRouteImport } from './routes/academic.schedule'
 import { Route as AcademicSyllabusRouteImport } from './routes/academic.syllabus'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminAbsenceRouteImport } from './routes/admin.absence'
@@ -165,11 +164,6 @@ const AcademicNotificationsRoute = AcademicNotificationsRouteImport.update({
 const AcademicProfileRoute = AcademicProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
-  getParentRoute: () => AcademicRoute,
-} as any)
-const AcademicScheduleRoute = AcademicScheduleRouteImport.update({
-  id: '/schedule',
-  path: '/schedule',
   getParentRoute: () => AcademicRoute,
 } as any)
 const AcademicSyllabusRoute = AcademicSyllabusRouteImport.update({
@@ -496,7 +490,6 @@ export interface FileRoutesByFullPath {
   '/academic/notes': typeof AcademicNotesRouteWithChildren
   '/academic/notifications': typeof AcademicNotificationsRoute
   '/academic/profile': typeof AcademicProfileRoute
-  '/academic/schedule': typeof AcademicScheduleRoute
   '/academic/syllabus': typeof AcademicSyllabusRoute
   '/admin/absence': typeof AdminAbsenceRoute
   '/admin/admissions': typeof AdminAdmissionsRoute
@@ -569,7 +562,6 @@ export interface FileRoutesByTo {
   '/academic/history': typeof AcademicHistoryRoute
   '/academic/notifications': typeof AcademicNotificationsRoute
   '/academic/profile': typeof AcademicProfileRoute
-  '/academic/schedule': typeof AcademicScheduleRoute
   '/academic/syllabus': typeof AcademicSyllabusRoute
   '/admin/absence': typeof AdminAbsenceRoute
   '/admin/admissions': typeof AdminAdmissionsRoute
@@ -647,7 +639,6 @@ export interface FileRoutesById {
   '/academic/notes': typeof AcademicNotesRouteWithChildren
   '/academic/notifications': typeof AcademicNotificationsRoute
   '/academic/profile': typeof AcademicProfileRoute
-  '/academic/schedule': typeof AcademicScheduleRoute
   '/academic/syllabus': typeof AcademicSyllabusRoute
   '/admin/absence': typeof AdminAbsenceRoute
   '/admin/admissions': typeof AdminAdmissionsRoute
@@ -728,7 +719,6 @@ export interface FileRouteTypes {
     | '/academic/notes'
     | '/academic/notifications'
     | '/academic/profile'
-    | '/academic/schedule'
     | '/academic/syllabus'
     | '/admin/absence'
     | '/admin/admissions'
@@ -801,7 +791,6 @@ export interface FileRouteTypes {
     | '/academic/history'
     | '/academic/notifications'
     | '/academic/profile'
-    | '/academic/schedule'
     | '/academic/syllabus'
     | '/admin/absence'
     | '/admin/admissions'
@@ -878,7 +867,6 @@ export interface FileRouteTypes {
     | '/academic/notes'
     | '/academic/notifications'
     | '/academic/profile'
-    | '/academic/schedule'
     | '/academic/syllabus'
     | '/admin/absence'
     | '/admin/admissions'
@@ -1067,13 +1055,6 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/academic/profile'
       preLoaderRoute: typeof AcademicProfileRouteImport
-      parentRoute: typeof AcademicRoute
-    }
-    '/academic/schedule': {
-      id: '/academic/schedule'
-      path: '/schedule'
-      fullPath: '/academic/schedule'
-      preLoaderRoute: typeof AcademicScheduleRouteImport
       parentRoute: typeof AcademicRoute
     }
     '/academic/syllabus': {
@@ -1520,7 +1501,6 @@ interface AcademicRouteChildren {
   AcademicNotesRoute: typeof AcademicNotesRouteWithChildren
   AcademicNotificationsRoute: typeof AcademicNotificationsRoute
   AcademicProfileRoute: typeof AcademicProfileRoute
-  AcademicScheduleRoute: typeof AcademicScheduleRoute
   AcademicSyllabusRoute: typeof AcademicSyllabusRoute
   AcademicIndexRoute: typeof AcademicIndexRoute
 }
@@ -1532,7 +1512,6 @@ const AcademicRouteChildren: AcademicRouteChildren = {
   AcademicNotesRoute: AcademicNotesRouteWithChildren,
   AcademicNotificationsRoute: AcademicNotificationsRoute,
   AcademicProfileRoute: AcademicProfileRoute,
-  AcademicScheduleRoute: AcademicScheduleRoute,
   AcademicSyllabusRoute: AcademicSyllabusRoute,
   AcademicIndexRoute: AcademicIndexRoute,
 }
