@@ -28,6 +28,10 @@ import {
   ExaminationExportFormat,
   getStudentTotalMarks
 } from '../utils/examinationResults';
+import {
+  EligibilityFilter,
+  filterStudentsByEligibility
+} from '../utils/examinationEligibility';
 
 const formatDate = (value: string) => {
   const date = new Date(`${value}T00:00:00`);
@@ -90,6 +94,7 @@ export const Examinations: React.FC = () => {
   } = useTrainer();
   const searchParams = useSearch({ strict: false });
   const [expandedEligibleExamId, setExpandedEligibleExamId] = useState<string | null>(null);
+  const [eligibilityFilter, setEligibilityFilter] = useState<EligibilityFilter>('all');
   const [activeExamId, setActiveExamId] = useState<string | null>(null);
   const [draft, setDraft] = useState<ExaminationStudentMarks[]>([]);
   const [confirmingExamId, setConfirmingExamId] = useState<string | null>(null);
@@ -275,6 +280,11 @@ export const Examinations: React.FC = () => {
             )?.students ?? [];
             const batchStudentIds = new Set(batchStudents.map((student) => student.id));
             const eligibleStudentIds = new Set(exam.eligibleStudents.map((student) => student.studentId));
+            const visibleBatchStudents = filterStudentsByEligibility(
+              batchStudents,
+              eligibleStudentIds,
+              eligibilityFilter
+            );
             const finalEligibilityClosed = Boolean(earliest && currentTime.getTime() >= earliest.getTime());
 
             return (
@@ -438,9 +448,24 @@ export const Examinations: React.FC = () => {
 
                 {expandedEligibleExamId === exam.id && (
                   <div className="mt-4 overflow-x-auto rounded-lg border border-slate-200">
-                    <div className="flex items-center justify-between bg-lime-50 px-3 py-2 text-[10px] uppercase tracking-wide text-lime-900">
-                      <span>All students</span>
-                      <span>{finalEligibilityClosed ? 'Eligibility Closed' : 'Eligibility Open'}</span>
+                    <div className="flex flex-wrap items-center justify-between gap-2 bg-lime-50 px-3 py-2 text-[10px] uppercase tracking-wide text-lime-900">
+                      <span>{visibleBatchStudents.length} of {batchStudents.length} students</span>
+                      <div className="flex flex-wrap items-center gap-3">
+                        <label className="flex items-center gap-2 font-semibold">
+                          <span>Eligibility Status</span>
+                          <select
+                            value={eligibilityFilter}
+                            onChange={(event) => setEligibilityFilter(event.target.value as EligibilityFilter)}
+                            className="rounded-md border border-lime-200 bg-white px-2 py-1.5 text-[11px] font-medium normal-case tracking-normal text-slate-700 outline-none focus:border-lime-400"
+                            aria-label="Eligibility Status"
+                          >
+                            <option value="all">All Students</option>
+                            <option value="eligible">Eligible</option>
+                            <option value="not-eligible">Not Eligible</option>
+                          </select>
+                        </label>
+                        <span>{finalEligibilityClosed ? 'Eligibility Closed' : 'Eligibility Open'}</span>
+                      </div>
                     </div>
                     <table className="w-full min-w-[400px] text-left text-xs">
                       <thead className="bg-lime-50 text-[10px] uppercase tracking-wide text-lime-900">
@@ -452,7 +477,13 @@ export const Examinations: React.FC = () => {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100">
-                        {batchStudents.map((student) => {
+                        {visibleBatchStudents.length === 0 ? (
+                          <tr>
+                            <td colSpan={4} className="px-3 py-5 text-center text-slate-500">
+                              No students match this eligibility status.
+                            </td>
+                          </tr>
+                        ) : visibleBatchStudents.map((student) => {
                           const isEligible = eligibleStudentIds.has(student.id);
                           return (
                             <tr key={student.id} className={isEligible ? 'text-slate-700' : 'text-slate-400'}>
