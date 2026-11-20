@@ -1329,11 +1329,13 @@ nav a { transition: background .25s, color .25s, border-color .25s; }
 @layer components {
   .solvik-backdrop {
     position: fixed;
-    inset: 0;
+    /* The ribbon's focal point is at 43.5% of the artwork; a 115% canvas
+       anchored to the top places that point at 50% of the visible screen. */
+    inset: 0 0 -15%;
     z-index: 0;
     pointer-events: none;
     background-size: cover;
-    background-position: center;
+    background-position: center top;
   }
   .solvik-backdrop::after {
     content: "";
