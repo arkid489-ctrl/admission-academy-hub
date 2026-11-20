@@ -21,7 +21,6 @@ import { Route as WorkspaceRouteImport } from './routes/workspace'
 import { Route as AcademicIndexRouteImport } from './routes/academic.index'
 import { Route as AcademicAttendanceRouteImport } from './routes/academic.attendance'
 import { Route as AcademicExaminationsRouteImport } from './routes/academic.examinations'
-import { Route as AcademicHistoryRouteImport } from './routes/academic.history'
 import { Route as AcademicNotesRouteImport } from './routes/academic.notes'
 import { Route as AcademicNotificationsRouteImport } from './routes/academic.notifications'
 import { Route as AcademicProfileRouteImport } from './routes/academic.profile'
@@ -144,11 +143,6 @@ const AcademicAttendanceRoute = AcademicAttendanceRouteImport.update({
 const AcademicExaminationsRoute = AcademicExaminationsRouteImport.update({
   id: '/examinations',
   path: '/examinations',
-  getParentRoute: () => AcademicRoute,
-} as any)
-const AcademicHistoryRoute = AcademicHistoryRouteImport.update({
-  id: '/history',
-  path: '/history',
   getParentRoute: () => AcademicRoute,
 } as any)
 const AcademicNotesRoute = AcademicNotesRouteImport.update({
@@ -486,7 +480,6 @@ export interface FileRoutesByFullPath {
   '/workspace': typeof WorkspaceRoute
   '/academic/attendance': typeof AcademicAttendanceRoute
   '/academic/examinations': typeof AcademicExaminationsRoute
-  '/academic/history': typeof AcademicHistoryRoute
   '/academic/notes': typeof AcademicNotesRouteWithChildren
   '/academic/notifications': typeof AcademicNotificationsRoute
   '/academic/profile': typeof AcademicProfileRoute
@@ -559,7 +552,6 @@ export interface FileRoutesByTo {
   '/workspace': typeof WorkspaceRoute
   '/academic/attendance': typeof AcademicAttendanceRoute
   '/academic/examinations': typeof AcademicExaminationsRoute
-  '/academic/history': typeof AcademicHistoryRoute
   '/academic/notifications': typeof AcademicNotificationsRoute
   '/academic/profile': typeof AcademicProfileRoute
   '/academic/syllabus': typeof AcademicSyllabusRoute
@@ -635,7 +627,6 @@ export interface FileRoutesById {
   '/workspace': typeof WorkspaceRoute
   '/academic/attendance': typeof AcademicAttendanceRoute
   '/academic/examinations': typeof AcademicExaminationsRoute
-  '/academic/history': typeof AcademicHistoryRoute
   '/academic/notes': typeof AcademicNotesRouteWithChildren
   '/academic/notifications': typeof AcademicNotificationsRoute
   '/academic/profile': typeof AcademicProfileRoute
@@ -715,7 +706,6 @@ export interface FileRouteTypes {
     | '/workspace'
     | '/academic/attendance'
     | '/academic/examinations'
-    | '/academic/history'
     | '/academic/notes'
     | '/academic/notifications'
     | '/academic/profile'
@@ -788,7 +778,6 @@ export interface FileRouteTypes {
     | '/workspace'
     | '/academic/attendance'
     | '/academic/examinations'
-    | '/academic/history'
     | '/academic/notifications'
     | '/academic/profile'
     | '/academic/syllabus'
@@ -863,7 +852,6 @@ export interface FileRouteTypes {
     | '/workspace'
     | '/academic/attendance'
     | '/academic/examinations'
-    | '/academic/history'
     | '/academic/notes'
     | '/academic/notifications'
     | '/academic/profile'
@@ -1027,13 +1015,6 @@ declare module '@tanstack/react-router' {
       path: '/examinations'
       fullPath: '/academic/examinations'
       preLoaderRoute: typeof AcademicExaminationsRouteImport
-      parentRoute: typeof AcademicRoute
-    }
-    '/academic/history': {
-      id: '/academic/history'
-      path: '/history'
-      fullPath: '/academic/history'
-      preLoaderRoute: typeof AcademicHistoryRouteImport
       parentRoute: typeof AcademicRoute
     }
     '/academic/notes': {
@@ -1497,7 +1478,6 @@ const AcademicNotesRouteWithChildren = AcademicNotesRoute._addFileChildren(
 interface AcademicRouteChildren {
   AcademicAttendanceRoute: typeof AcademicAttendanceRoute
   AcademicExaminationsRoute: typeof AcademicExaminationsRoute
-  AcademicHistoryRoute: typeof AcademicHistoryRoute
   AcademicNotesRoute: typeof AcademicNotesRouteWithChildren
   AcademicNotificationsRoute: typeof AcademicNotificationsRoute
   AcademicProfileRoute: typeof AcademicProfileRoute
@@ -1508,7 +1488,6 @@ interface AcademicRouteChildren {
 const AcademicRouteChildren: AcademicRouteChildren = {
   AcademicAttendanceRoute: AcademicAttendanceRoute,
   AcademicExaminationsRoute: AcademicExaminationsRoute,
-  AcademicHistoryRoute: AcademicHistoryRoute,
   AcademicNotesRoute: AcademicNotesRouteWithChildren,
   AcademicNotificationsRoute: AcademicNotificationsRoute,
   AcademicProfileRoute: AcademicProfileRoute,

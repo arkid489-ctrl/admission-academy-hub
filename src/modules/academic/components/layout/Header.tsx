@@ -24,8 +24,6 @@ export const Header: React.FC = () => {
         return { title: 'Notes Management', subtitle: 'Prepare and manage notes for assigned module topics' };
       case '/attendance':
         return { title: 'Attendance', subtitle: 'Review batch-wise biometric attendance records' };
-      case '/history':
-        return { title: 'Session History', subtitle: 'Archive of conducted and documented academic sessions' };
       case '/notifications':
         return { title: 'Notifications & Reminders', subtitle: 'Syllabus overdue alerts and schedule actions' };
       case '/examinations':

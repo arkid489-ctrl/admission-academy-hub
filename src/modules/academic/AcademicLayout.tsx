@@ -9,7 +9,6 @@ const pages = [
   { to: '/academic/syllabus', label: 'My class  Schedule', exact: false },
   { to: '/academic/notes', label: 'Notes', exact: false },
   { to: '/academic/attendance', label: 'Attendance', exact: false },
-  { to: '/academic/history', label: 'History', exact: false },
   { to: '/academic/notifications', label: 'Notifications', exact: false },
   { to: '/academic/examinations', label: 'Examinations', exact: false },
   { to: '/academic/profile', label: 'Profile', exact: false },
